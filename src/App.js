@@ -13,7 +13,7 @@ datadogRum.init({
   // `site` refers to the Datadog site parameter of your organization
   // see https://docs.datadoghq.com/getting_started/site/
   site: "us5.datadoghq.com",
-  service: "recipe-app",
+  service: "recipe_app_client",
   env: config.ENVIRONMENT,
   // Specify a version number to identify the deployed version of your application in Datadog
   // version: '1.0.0',
@@ -24,7 +24,7 @@ datadogRum.init({
   trackLongTasks: true,
   defaultPrivacyLevel: "mask-user-input",
 });
-
+//console.log(config.DD_APP_ID);
 const App = () => {
   return (
     <div>
@@ -47,12 +47,12 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />
+        element: <About />,
       },
       {
         path: "/services",
-        element: <Services />
-      }
+        element: <Services />,
+      },
     ],
   },
 ]);
