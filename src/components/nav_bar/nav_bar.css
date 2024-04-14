@@ -1,0 +1,30 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the menu container */
+ul.menu {
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+}
+
+/* Style the menu items */
+ul.menu li {
+  margin: 0;
+  padding: 10px 20px;
+}
+
+/* Style the menu links */
+ul.menu li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Add hover effect */
+ul.menu li:hover {
+  background-color: #555;
+}
