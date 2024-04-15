@@ -22,11 +22,44 @@ const Recipes = () => {
     fetchData();
   }, []);
 
-  const createMonitor = async () => {
-    const response = await axios.get(
-      `https://food-app-api-ea5df59bcdc8.herokuapp.com/api/create-dd-monitor`
-    );
-    setData(response.data);
+  const createMonitor = () => {
+    // Define your Datadog API and APP keys
+    const apiKey = config.DD_API_KEY;
+    const appKey = config.DD_APP_KEY;
+
+    // Construct the monitor payload
+    const monitorPayload = {
+      name: "My Monitor",
+      type: "metric alert",
+      query: "avg(last_5m):sum:system.load.5{host:host0} > 1",
+      message: "Load spike on host0",
+      tags: ["env:prod", "team:backend"],
+      options: {
+        thresholds: {
+          critical: 1.5,
+        },
+      },
+    };
+
+    // Define Datadog API endpoint for creating monitors
+    const apiUrl = "https://api.datadoghq.com/api/v1/monitor";
+
+    // Define headers for API request
+    const headers = {
+      "Content-Type": "application/json",
+      "DD-API-KEY": apiKey,
+      "DD-APPLICATION-KEY": appKey,
+    };
+
+    // Make API request to create the monitor
+    axios
+      .post(apiUrl, monitorPayload, { headers })
+      .then((response) => {
+        console.log("Monitor created successfully:", response?.data);
+      })
+      .catch((error) => {
+        console.error("Error creating monitor:", error?.response?.data);
+      });
   };
 
   return (
